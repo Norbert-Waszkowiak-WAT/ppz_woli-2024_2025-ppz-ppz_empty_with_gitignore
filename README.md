@@ -27,7 +27,6 @@ Moduły funkcjonalności:
 Dodatkowe funkcjonalności:
 1. Wsparcie dla rozszerzeń
 1. Rozszerzenie "Synchronizacja z Librusem"
-    1.  Rozszerzenie
 1. AI
 1. Pomodoro timer
 
