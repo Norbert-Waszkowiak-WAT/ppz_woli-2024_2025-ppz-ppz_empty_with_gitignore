@@ -61,6 +61,30 @@ Backend będzie zaimplementowany w NestJS z możliwością użycia Rust do kryty
 * Zarządzanie danymi zadań, nawyków oraz przypomnień
 
 ### 7. Harmonogram prac dla 4 etapów
+Etap 1 - Moduł rejestracji i logowania
+* Implementacja systemu     
+* Implementacja autoryzacji
+* Wykonanie modelu użytkowanika oraz komunikacja z backendem
+* Testowanie
+Etap 2 -  Moduł kalendarza 
+* Implementacja Kalendarza  
+* Dodanie synchronizacji kalendarza 
+* Implementacja powiadomień
+* Testowanie
+Etap 3 - Moduł kontrolowania nawyków, Moduł zadań
+* Wykonanie modelu kontrolowania nawyków oraz jego implementacja w kalendarzu
+* Wykonanie modelu zadań i ich implementacja w kalendarzu
+* Dodanie synchronizacja nawyków i zadań
+* Implementacja powiadomień
+* Testowanie 
+Etap 4 - Moduł celów, Moduł postępów projektów
+* Wykonanie Modułu celów i jego implementacja w kalendarzu
+* Wykonanie Modułu postępów projektów i jego implementacja w kalendarza
+* Dodanie synchronizacji
+* Dodanie powiadomień
+* Testowanie
+
+
 
 ### 8. Kryteria sukcesu
 * Funkcjonalność MVP (Minimum Viable Product): Aplikacja powinna zapewniać płynne działanie podstawowych modułów:
