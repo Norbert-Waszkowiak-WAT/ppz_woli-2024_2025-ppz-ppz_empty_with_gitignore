@@ -1,3 +1,5 @@
+Tauri + TypeScript + Svelte/Kit
+
 Po sklonowaniu z githuba:
 * `npm install`
 
