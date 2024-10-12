@@ -1,7 +1,9 @@
-# Tauri + SvelteKit + TypeScript
+Po sklonowaniu z githuba:
+* `npm install`
 
-This template should help get you started developing with Tauri, SvelteKit and TypeScript in Vite.
+By włączyć projekt:
+* `npm run tauri dev`
 
-## Recommended IDE Setup
-
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer).
+Do developmentu aplikacji androida (wymagany Android Studio):
+* `npm run tauri android init` (Jeszcze do androida projekt nie został zainicjalizowany)
+* `npm run tauri android dev` - włączanie projektu w trybie deweloperskim
