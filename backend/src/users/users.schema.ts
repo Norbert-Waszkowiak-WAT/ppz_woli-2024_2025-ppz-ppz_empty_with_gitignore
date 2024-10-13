@@ -1,9 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Types } from 'mongoose';
 
-export type recruitDocument = HydratedDocument<userModel>;
+export type recruitDocument = HydratedDocument<userSchema>;
 @Schema()
-export class userModel {
+export class userSchema {
     @Prop({ type: Types.ObjectId, default: () => new Types.ObjectId() })
     _id: Types.ObjectId;
 
@@ -15,9 +15,10 @@ export class userModel {
 
     @Prop({ type: Date, default: () => new Date() })
     createdAt?: Date;
+    
 
 }
 
-export const recruitSchema = SchemaFactory.createForClass(userModel);
+export const userModel = SchemaFactory.createForClass(userSchema);
 
-recruitSchema.index({ username: 1 }, { unique: true });
+userModel.index({ username: 1 }, { unique: true });
