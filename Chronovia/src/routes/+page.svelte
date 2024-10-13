@@ -13,6 +13,8 @@
 <div class="container">
   <h1>Welcome to Tauri!</h1>
 
+  <a href="account/register">Go to great work</a>
+
   <div class="row">
     <a href="https://vitejs.dev" target="_blank">
       <img src="/vite.svg" class="logo vite" alt="Vite Logo" />
