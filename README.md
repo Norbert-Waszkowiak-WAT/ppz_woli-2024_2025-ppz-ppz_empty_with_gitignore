@@ -45,6 +45,10 @@ Frameworki:
 * Tauri
 * NestJS
 
+Dodatki do Svelte:
+* [Melt UI](https://melt-ui.com)
+* Prawdopodobnie [svelte-dnd-action](https://github.com/isaacHagoel/svelte-dnd-action) do np. kalendarza 
+
 Narzędzia:
 * Git (版本控制)
 * MongoDB

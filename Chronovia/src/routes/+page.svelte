@@ -11,9 +11,13 @@
 </script>
 
 <div class="container">
+  <!--  This is the place for windows container, it would make rounded app edges, load
+        styles, handle routes (from there to login )-->
+
   <h1>Welcome to Tauri!</h1>
 
-  <a href="account/register">Go to great work</a>
+  <a href="account/register">Register page</a>
+  <a href="account/login">Login page</a>
 
   <div class="row">
     <a href="https://vitejs.dev" target="_blank">
