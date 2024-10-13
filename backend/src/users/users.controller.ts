@@ -18,23 +18,28 @@ import {
     async addUser(
       @Body('password') userPassword: string,
       @Body('username') userName: string,
+      @Body('email') userEmail: string
     ) {
       const saltOrRounds = 10;
       const hashedPassword = await bcrypt.hash(userPassword, saltOrRounds);
       const result = await this.usersService.insertUser(
         userName,
         hashedPassword,
+        userEmail
       );
       return {
-        msg: 'User successfully registered',
+        msg: 'Now please verify your email',
         userId: result.id,
-        userName: result.username
+        userName: result.username,
+        userEmail: result.email
+
       };
     }
     //Post / Login
     @UseGuards(LocalAuthGuard)
     @Post('/login')
     login(@Request() req): any {
+     
       return {User: req.user,
               msg: 'User logged in'};
     }

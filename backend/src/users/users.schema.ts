@@ -13,10 +13,18 @@ export class userSchema {
     @Prop( { type: String, required: [ true, 'password is required' ] })
     password:string;
 
+    @Prop({ type: String, required: [ true, 'email is required' ] })
+    email: string;
+
     @Prop({ type: Date, default: () => new Date() })
     createdAt?: Date;
     
+    @Prop({ type: Boolean, default: false })
+    verified?: boolean;
 
+    @Prop({ type: Boolean, default: false })
+    twofaenabled?: boolean;
+    
 }
 
 export const userModel = SchemaFactory.createForClass(userSchema);
