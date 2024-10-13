@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { userModel } from './users.schema';
+import { userModel, userSchema } from './users.schema';
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel('user') private readonly userModel: Model<userModel>) {}
+  constructor(@InjectModel('user') private readonly userModel: Model<userSchema>) {}
   async insertUser(userName: string, password: string) {
     const username = userName.toLowerCase(); 
     const newUser = new this.userModel({
