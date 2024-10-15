@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Verification</title>
+  <style>
+    .container {
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+    .button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 10px 0;
+      cursor: pointer;
+    }
+    .footer {
+      font-size: 12px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Email Verification</h2>
+    <p>Hello {{name}},</p>
+    <p>Thank you for registering. Please verify your email by clicking the button below:</p>
+    <a class="button" href="{{verificationLink}}">Verify Email</a>
+    <p>If you didn’t create an account, please ignore this email.</p>
+    <p class="footer">Thank you, <br> The {{appName}} Team</p> 
+  </div>
+</body>
+</html>
