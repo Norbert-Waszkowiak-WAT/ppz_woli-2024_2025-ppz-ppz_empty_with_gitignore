@@ -1,2 +1,0 @@
-<a href="/">Back to home page</a>
-<slot />
