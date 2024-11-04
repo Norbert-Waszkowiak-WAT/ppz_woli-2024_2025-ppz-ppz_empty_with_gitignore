@@ -1,61 +1,81 @@
 <script>
-    import { goto } from '$app/navigation';
-
     export let icon = '';
     export let heading = '';
     export let content = '';
-
     export let href = '/';
-
-    export let color = '#FFFFFF';
-    export let width = '100px';
-    export let height = '70px';
-
-    function goToHref() {
-        goto(href);
-    }
+    export let color = '#444444';
+    export let width = '200px';
+    export let make_white = '';
 </script>
 
-<div on:click={goToHref} class="container" style="background-color: {color}; width: {width}; height: {height};">
-    {#if icon != ""}
-    <img class="icon" src="{icon}" alt="Doesn't work" />
+<a class="container" href={href} style="width: {width}; background-color: {color};">
+    {#if icon && make_white == 'true'}
+        <div class="icon">
+            <img src="{icon}" 
+                alt="Icon"
+                style="filter: invert(50%) sepia(100%) saturate(0%) hue-rotate(180deg);" />
+        </div>
+    {:else}
+        <div class="icon">
+            <img src="{icon}" 
+                alt="Icon" />
+        </div>
     {/if}
-    
-    <div class="title"><h3>{heading}</h3></div>
-    <div class="content">
-        {content}
+    <div class="text-content">
+        <div class="title"><h3>{heading}</h3></div>
+        <div class="content">{content}</div>
     </div>
-</div>
+</a>
 
 <style>
-.container {
-    display: inline-grid;
-    grid-template-columns: auto auto; /* Left column for the item, right column for text */
-    grid-template-rows: auto auto; /* Two rows for title and content */
-    gap: 0px; /* Optional gap between elements */
-    padding: 10px;
-    align-items: start;
-    border-radius: 10px;
-}
+    .container {
+        display: flex; /* Use flexbox for layout */
+        align-items: center; /* Center items vertically */
+        justify-content: center; /* Center items horizontally */
+        border: 2px solid #444444; /* Border around the container */
+        border-radius: 10px; /* Rounded corners */
+        padding: 20px; /* Padding inside the container */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        min-height: 100px; /* Minimum height for the container */
+        text-decoration: none; /* Remove underline from the link */
+        color: inherit; /* Inherit color for text */
+    }
 
-.icon {
-    grid-row: 1 / span 2; /* Span both rows */
-    align-self: center; /* Center vertically */
-    height: 50px;
-    width: 50px;
-}
+    .container:hover {
+        background-color: #f0f0f0; /* Change background on hover */
+    }
 
-.title {
-    grid-column: 2;
-    align-self: start; /* Align title at the top */
-    text-align: center;
-    font-weight: bold;
-}
+    .icon {
+        margin-right: 15px; /* Space between icon and text */
+        display: flex; /* Use flexbox for icon */
+        align-items: center; /* Center icon vertically */
+    }
 
-.content {
-    grid-column: 2;
-    align-self: end; /* Align content at the bottom */
-    text-align: center;
-    color: gray;
-}
+    .icon img {
+        max-width: 40px; /* Set a maximum width for the icon */
+        max-height: 40px; /* Set a maximum height for the icon */
+        width: auto; /* Maintain aspect ratio */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    .text-content {
+        display: flex; /* Use flexbox for text content */
+        flex-direction: column; /* Stack title and content vertically */
+        justify-content: center; /* Center text vertically */
+    }
+
+    .title {
+        font-weight: bold; /* Bold text for the title */
+        margin: 0; /* Remove default margin */
+    }
+
+    .content {
+        color: gray; /* Color for the content text */
+        margin-top: 5px; /* Space between title and content */
+    }
+
+    /* Make text unselectable */
+    .container {
+        user-select: none; /* Prevent text selection */
+    }
 </style>
