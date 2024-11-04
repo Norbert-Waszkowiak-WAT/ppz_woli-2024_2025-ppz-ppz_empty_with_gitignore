@@ -7,5 +7,13 @@
         href='/auth/login'
         heading="Log in"
         content="to your account"
-        color="#444444"  />
+        color="#444444"
+        width="200px"  />
+    <AuthOption
+        icon="/i/person-add.svg"
+        href='/auth/register'
+        heading='Register'
+        content='a new account'
+        color="#444444"  
+        width="200px"/>
 </div>

@@ -16,11 +16,9 @@
     }
 </script>
 
-<div on:click={goToHref} class="container" style="background-color: {color}; width={width}; height={height};">
+<div on:click={goToHref} class="container" style="background-color: {color}; width: {width}; height: {height};">
     {#if icon != ""}
-    <div class="icon">
-        <img src="{icon}" alt="Doesn't work" />
-    </div>
+    <img class="icon" src="{icon}" alt="Doesn't work" />
     {/if}
     
     <div class="title"><h3>{heading}</h3></div>
@@ -42,9 +40,9 @@
 
 .icon {
     grid-row: 1 / span 2; /* Span both rows */
-    align-self: right; /* Center vertically */
-    padding-right: 10px;
-
+    align-self: center; /* Center vertically */
+    height: 50px;
+    width: 50px;
 }
 
 .title {
