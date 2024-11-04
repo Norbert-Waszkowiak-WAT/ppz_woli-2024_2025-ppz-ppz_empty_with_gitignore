@@ -33,6 +33,9 @@ import {
       if(await this.usersService.checkUniqueness(userEmail)){
         throw new UnauthorizedException('Email already used');
       }
+      if(await this.usersService.checkUniqueness(userName)){
+        throw new UnauthorizedException('Username already used');
+      }
       const saltOrRounds = 10;
       const hashedPassword = await bcrypt.hash(userPassword, saltOrRounds);
       const result = await this.usersService.insertUser(

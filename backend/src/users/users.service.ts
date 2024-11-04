@@ -30,8 +30,8 @@ const email=user.email;
     const user = await this.userModel.findOne({ email });
     return user;
   }
-  async checkUniqueness(email: string): Promise<boolean> {
-    const user = await this.userModel.findOne({ email });
+  async checkUniqueness(checkedInfo: string): Promise<boolean> {
+    const user = await this.userModel.findOne({ checkedInfo });
     return !!user;
   }
   async verifyUserEmail(email: string, code: string, password: string): Promise<boolean> {

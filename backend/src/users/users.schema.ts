@@ -38,6 +38,6 @@ export class userSchema {
 
 export const userModel = SchemaFactory.createForClass(userSchema);
 
-userModel.index({ email: 1 }, { unique: true });
+userModel.index({ email: 1,username: 1 }, { unique: true });
 
 

@@ -15,7 +15,7 @@ The program does not check if emails are valid!!!
 - **URL:** `/users/register`
 - **Method:** `POST`
 - **Request Body:**
-  - `username`: string (required)
+  - `username`: string (required,unique)
   - `email`: string (required,unique)
   - `password`: string (required)
 - **Response:**
@@ -47,6 +47,13 @@ will return this json if the email is already in use
 	"message": "Email already used",
 	"error": "Unauthorized",
 	"statusCode": 401
+}
+if username is already in use
+```json
+{
+  "message": "Username already used",
+  "error": "Unauthorized",
+  "statusCode": 401
 }
 Login Endpoint
 
