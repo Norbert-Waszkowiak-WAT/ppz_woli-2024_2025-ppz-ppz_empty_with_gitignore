@@ -1,3 +1,5 @@
+> Zdjecia do pierwszego etapu znajduja sie w [etap1.md](Etap1/etap1.md)
+
 # Chronovia
 
 ### 1. Tytuł i opis projektu
