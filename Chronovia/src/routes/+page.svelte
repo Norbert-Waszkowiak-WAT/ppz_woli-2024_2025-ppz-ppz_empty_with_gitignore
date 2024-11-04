@@ -10,9 +10,10 @@
 
   <div class="auth">
     <h3>Authorization module</h3>
-    <a href="auth" class="module-main-link">Main</a>
+    
     <br/>
     <ul>
+      <li><a href="auth" class="module-main-link">Main</a></li>
       <li><a href="auth/register">Register page</a></li>
       <li><a href="auth/login">Login page</a></li>
     </ul>
@@ -22,12 +23,16 @@
 </div>
 
 <style>
-.module-main-link {
-  font-size: 22px;
-}
-
-:global(html) {
+    .module-main-link {
+      font-size: 22px;
+    }
+    :global(html) {
         color: #dddddd;
         background-color: #303030;
+    }
+    :global(a) {
+        color: #e7e7d1; /* Link color */
+        text-decoration: none; /* Remove underline from link */
+        font-weight: bold; /* Bold text for the link */
     }
 </style>

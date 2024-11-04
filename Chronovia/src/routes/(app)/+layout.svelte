@@ -12,15 +12,16 @@
         align-items: center; /* Center items horizontally */
         width: 80vi; /* Full viewport width */
         height: 80vh; /* Full viewport height */
-        background-color: #f0f0f0; /* Light background color */
+        background-color: #303030; /* Light background color */
         text-align: center; /* Center text alignment */
     }
 
     a {
         margin-bottom: 20px; /* Space between the link and the slot content */
-        color: #444444; /* Link color */
+        color: gray; /* Link color */
         text-decoration: none; /* Remove underline from link */
         font-weight: bold; /* Bold text for the link */
+        align-self: left;
     }
 
     a:hover {
@@ -29,7 +30,6 @@
 
     /* Optional: Style for the slot content */
     ::slotted(*) {
-        background-color: #ffffff; /* Background color for the slot content */
         border: 2px solid #444444; /* Border around the slot area */
         border-radius: 10px; /* Rounded corners */
         padding: 20px; /* Padding inside the slot area */

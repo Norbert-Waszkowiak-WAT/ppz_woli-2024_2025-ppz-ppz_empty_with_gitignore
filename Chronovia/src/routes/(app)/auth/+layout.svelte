@@ -9,7 +9,7 @@
         align-items: center; /* Center vertically */
         width: 50vw; /* Full viewport width */
         height: 50vh; /* Full viewport height */
-        background-color: #f0f0f0; /* Light background color */
+        background-color: #303030; /* Light background color */
         
     }
 
