@@ -6,15 +6,18 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { EmailModule } from './email/email.module';
 import { ConfigModule } from '@nestjs/config';
+import { CalendarModule } from './calender/calendar.module';
 
 @Module({
   imports: [MongooseModule.forRoot('mongodb://localhost/nest'),
     ConfigModule.forRoot({
-      isGlobal: true, // makes environment variables available throughout the app
+      isGlobal: true, 
     }),
      UsersModule,
      AuthModule,
-     EmailModule
+     EmailModule,
+     CalendarModule,
+     
     ],
   controllers: [AppController],
   providers: [AppService],

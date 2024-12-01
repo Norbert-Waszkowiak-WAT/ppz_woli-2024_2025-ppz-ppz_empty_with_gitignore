@@ -1,7 +1,7 @@
 import { Injectable, NotAcceptableException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { userModel, userSchema } from './users.schema';
+import { userSchema } from './users.schema';
 import { EmailService } from 'src/email/email.service';
 import * as bcrypt from 'bcrypt';
 import * as crypto from 'crypto';
