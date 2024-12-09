@@ -36,7 +36,7 @@ Example Response:
 json
 
 {
-	"msg": "Now please verify your email",
+	"message": "Now please verify your email",
 	"userId": "672797f0c2acec05a02dc4ab",
 	"userName": "negro",
 	"userEmail": "alexanderdawi1@hotmail.com"
@@ -84,7 +84,7 @@ json
 		"userId": "672797f0c2acec05a02dc4ab",
 		"userName": "negro"
 	},
-	"msg": "User logged in"
+	"message": "User logged in"
 }
 will return this json if the email is not verfied
 json
