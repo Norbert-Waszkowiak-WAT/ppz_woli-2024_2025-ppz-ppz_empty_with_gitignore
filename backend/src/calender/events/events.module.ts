@@ -12,6 +12,6 @@ import { Recurring , RecurringSchema } from '../recurring.schema';
 ],
   controllers: [],
   providers: [EventsService],
-  exports: [EventsService],
+  exports: [EventsService]
 })
 export class EventsModule {}

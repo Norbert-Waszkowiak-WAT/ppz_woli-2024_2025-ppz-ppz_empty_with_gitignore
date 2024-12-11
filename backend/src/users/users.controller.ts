@@ -54,7 +54,7 @@ import {
     @UseGuards(LocalAuthGuard)
     @Post('/login')
     login(@Request() req): any {
-     
+      console.log('User after login:', req.user); // Debugging
       return {User: req.user,
               msg: 'User logged in'};
     }
@@ -65,6 +65,11 @@ import {
       return req.user;
     }
      //Get / logout
+     @Get('/session-info')
+sessionInfo(@Request() req): any {
+  return req.session;
+}
+
     @Get('/logout')
       logout(@Request() req): any {
         req.session.destroy();

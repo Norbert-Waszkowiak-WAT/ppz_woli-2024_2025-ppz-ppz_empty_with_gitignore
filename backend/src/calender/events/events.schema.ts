@@ -4,7 +4,7 @@ import { Recurring , RecurringSchema } from '../recurring.schema';
 
 
 @Schema()
-export class EventSchema {
+export class Event {
   @Prop({ required: true })
   title: string;
   @Prop({required: true})
@@ -25,6 +25,6 @@ export class EventSchema {
 recurring?: Recurring;
 }
 
-export const EventModel = SchemaFactory.createForClass(EventSchema);
+export const EventSchema = SchemaFactory.createForClass(Event);
 
-EventModel.index({ userId: 1, startDate: 1 });
+EventSchema.index({ userId: 1, startDate: 1 });

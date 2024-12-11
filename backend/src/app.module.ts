@@ -17,7 +17,6 @@ import { CalendarModule } from './calender/calendar.module';
      AuthModule,
      EmailModule,
      CalendarModule,
-     
     ],
   controllers: [AppController],
   providers: [AppService],
