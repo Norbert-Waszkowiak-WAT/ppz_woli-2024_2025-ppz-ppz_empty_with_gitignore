@@ -30,17 +30,19 @@ The program does not check if emails are valid!!!
 	"password": "negromancer"
 	
 }
+```
 
-Example Response:
+Example Responses:
 
-json
-
+Default -> Verification
+```json
 {
-	"msg": "Now please verify your email",
+	"message": "Now please verify your email",
 	"userId": "672797f0c2acec05a02dc4ab",
 	"userName": "negro",
 	"userEmail": "alexanderdawi1@hotmail.com"
 }
+```
 will return this json if the email is already in use
 ```json
 {
@@ -48,6 +50,7 @@ will return this json if the email is already in use
 	"error": "Unauthorized",
 	"statusCode": 401
 }
+```
 if username is already in use
 ```json
 {
@@ -55,102 +58,107 @@ if username is already in use
   "error": "Unauthorized",
   "statusCode": 401
 }
-Login Endpoint
+```
 
-    URL: /users/login
-    Method: POST
-    Request Body:
-        email: string (required)
-        password: string (required)
-    Response:
-        user: object (contains the authenticated user data)
-        token: string (contains the authentication token)
+## Login Endpoint
+- URL: /users/login
+- Method: POST
+- Request Body:
+  - `email`: string (required)
+  - `password`: string (required)
+- Response:
+  - `user`: object (contains the authenticated user data)
+  - `token`: string (contains the authentication token)
 
 Example Request:
-
-json
-
+``` json
 {
   "email": "johnDoe@negro300.com",
   "password": "password123"
 }
+```
 
 Example Response:
 
-json
-
+``` json
 {
 	"User": {
 		"userId": "672797f0c2acec05a02dc4ab",
 		"userName": "negro"
 	},
-	"msg": "User logged in"
+	"message": "User logged in"
 }
+```
 will return this json if the email is not verfied
-json
+``` json
 {
 	"message": "Please verify your email address",
 	"error": "Unauthorized",
 	"statusCode": 401
 }
+```
 and this json if email is not found
-json
+``` json
 {
 	"message": "email incorrect",
 	"error": "Unauthorized",
 	"statusCode": 401
 }
+```
 and this json if password incorrect
+``` json
 {
 	"message": "Password Incorrect",
 	"error": "Unauthorized",
 	"statusCode": 401
 }
-verify-sentcode Endpiont
+```
+## verify-sentcode Endpoint
 
-    URL: /users/verify-sentcode
-    Method: POST
-    Request Body:
-        email: string (required)
-        code: string (required)
-        password : string (required)
-    Response:
-        message: string (contains the success message)
+- URL: /users/verify-sentcode
+- Method: POST
+- Request Body:
+  - `email`: string (required)
+  - `code`: string (required)
+  - `password`: string (required)
+- Response:
+  - `message`: string (contains the success message)
 
 Example Request:
-
-json
-
+``` json
 {
   "email": "johnDoe@negro300.com",
   "password": "password123",
   "code": "123456"
 }
+```
 response
-json 
+``` json 
 {
   "message": "Email verified successfully"
 }
-resend-verification-code Endpiont
-
-    URL: /users/resend-verification-code  
-    Method: POST  
-    Request Body: email
-    Response:
-        message: string (contains the success message)
+```
+## resend-verification-code Endpoint
+- URL: /users/resend-verification-code  
+- Method: POST  
+- Request Body: email
+- Response:
+  - message: string (contains the success message)
 
 Example Request:
-
-json
-
+``` json
 {
   "email": "johnDoe@negro300.com"
 }
+```
 response
-json {
+``` json 
+{
   "message": "Verification code sent successfully"
 }
-reset-password Endpiont
+```
+
+## reset-password Endpoint
 
     URL: /users/reset-password
     Method: POST
@@ -160,20 +168,25 @@ reset-password Endpiont
 
 Example Request:
 
-json
+``` json 
 
 {
   "email": "johnDoe@negro300.com"
 }
+```
 response
+``` json
 {
   "message": "Password reset email sent"
 }
+``` 
 or if incorrect email
+``` json 
 {
   "message": "Email not found"
 }
-reset-password/:token Endpoint
+``` 
+## reset-password/:token Endpoint
 Part 2 of reseting a password
 
     URL: /users/reset-password/:token
@@ -184,20 +197,25 @@ Part 2 of reseting a password
 
 Example Request:
 
-json
+``` json 
 
 {
   "password": "password123"
 }
+``` 
 response
+``` json 
 {
   "message": "Password reset successful"
 }
+``` 
 if token invalid or expired
+``` json 
 {
   "message": "Invalid or expired token"
 }
-delete-user Endpiont
+```
+## delete-user Endpiont
 
     URL: /users/delete-user
     Method: post
@@ -207,21 +225,26 @@ delete-user Endpiont
 
 Example Request:
 
-json
+``` json 
 
 {
   "email": "johnDoe@negro300.com",
   "password": "password123"
 }
-response 
+``` 
+response
+``` json   
 {
   "message": "User deleted successfully"
 }
+``` 
 if password is incorrect
+``` json 
 {
   "message": "Invalid password"
 }
-Logout Endpoint
+``` 
+ ## Logout Endpoint
 
     URL: /logout
     Method: GET
