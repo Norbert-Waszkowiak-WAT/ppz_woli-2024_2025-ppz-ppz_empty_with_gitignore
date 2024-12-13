@@ -249,3 +249,77 @@ if password is incorrect
     URL: /logout
     Method: GET
     Request Body: empty
+ ## addEvent enpoint
+
+    URL: calendar/addEvent
+    Method: post
+    Request Body: event (required)
+    Response:
+        contains the whole event and reccuring with id's
+
+ Example request:
+ With the event not reocurring
+ ``` json   
+ {
+  "title": "Meeting",
+  "type": "Work",
+  "description": "Project discussion",
+  "startDate": "2024-12-13T10:00:00.000Z",
+  "endDate": "2024-12-13T11:00:00.000Z",
+  "recurring": null //null for a one-time event
+}
+```
+Response:
+```json 
+{
+	"title": "Meeting",
+	"type": "Work",
+	"description": "Project discussion",
+	"startDate": "2024-12-13T10:00:00.000Z",
+	"endDate": "2024-12-13T11:00:00.000Z",
+	"recurring": null,
+	"_id": "675c8b1479abe2dca5499fb9",
+	"__v": 0
+}
+```
+
+  With the event reocurring:
+  ``` json 
+  {
+  "title": "Gym Session",
+  "type": "personal",
+  "description": "Morning workout",
+  "startDate": "2024-12-06T07:00:00Z",
+  "endDate": "2024-12-06T08:00:00Z",
+  "recurring": {
+    "frequency": "weekly",
+    "interval": 1,
+    "byDay": ["MO", "WE", "FR"],
+    "endDate": "2024-12-31T00:00:00Z"
+  }
+}
+```
+Response:
+``` json 
+{
+	"title": "Gym Session",
+	"type": "personal",
+	"description": "Morning workout",
+	"startDate": "2024-12-06T07:00:00.000Z",
+	"endDate": "2024-12-06T08:00:00.000Z",
+	"recurring": {
+		"frequency": "weekly",
+		"interval": 1,
+		"byDay": [
+			"MO",
+			"WE",
+			"FR"
+		],
+		"byMonth": [],
+		"endDate": "2024-12-31T00:00:00.000Z",
+		"_id": "675c8ade79abe2dca5499fb7"
+	},
+	"_id": "675c8ade79abe2dca5499fb6",
+	"__v": 0
+}
+```
