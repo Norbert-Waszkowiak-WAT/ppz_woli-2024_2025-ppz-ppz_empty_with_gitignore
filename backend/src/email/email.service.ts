@@ -25,7 +25,6 @@ export class EmailService {
     { verificationCode, verificationCodeExpires: expirationTime }
     );
     
-console.log(verificationCode);
     // Send the email using Nodemailer
     const transporter = nodemailer.createTransport({
       service: 'gmail', // or another service

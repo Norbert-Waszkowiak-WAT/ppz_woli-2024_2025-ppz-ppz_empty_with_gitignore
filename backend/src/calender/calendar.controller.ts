@@ -3,9 +3,8 @@ import { CalendarService } from "./calendar.service"
 import{ Event} from "./events/events.schema"
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
-import { AuthGuard } from "@nestjs/passport";
-import { CreateEventDto } from './events/events.dto';
-import { LocalAuthGuard } from "src/auth/local.auth.guard";
+import { CreateEventDto } from './events/dto/events.dto';
+import { AuthenticatedGuard } from "src/auth/authenticated.guard";
 
 @Controller('calendar')
   export class CalendarController {
@@ -13,14 +12,10 @@ import { LocalAuthGuard } from "src/auth/local.auth.guard";
       private readonly CalendarService: CalendarService,
     ) {}
     @Post('/addEvent')
-    @UseGuards(LocalAuthGuard) // Ensure the user is authenticated
-    async addEvent(@Body() addEventDto: CreateEventDto, @Req() req: Request) {
-     //const userId = req.session.userId;
-     
-     return {
-       message: 'Event added successfully'
-     }
-     // return this.CalendarService.createEvent(addEventDto, userId);
+    @UseGuards(AuthenticatedGuard) // Ensure the user is authenticated
+    async addEvent(@Body() addEventDto: CreateEventDto, @Req() req: any) {
+     const userId = req.session.passport.user;  
+      return this.CalendarService.createEvent(addEventDto, userId);
     }
     
 }

@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule)
   app.use(
     session({
-      secret: 'keyboard',
+      secret: process.env.PASSPORT_SECRET,
       resave: false,
       saveUninitialized: false,
       cookie: { secure: false }, // Set secure: true in production with HTTPS
@@ -15,7 +15,7 @@ async function bootstrap() {
   
   app.use(passport.initialize())
   app.use(passport.session())
-
+ 
   await app.listen(3000)
 }
 bootstrap()

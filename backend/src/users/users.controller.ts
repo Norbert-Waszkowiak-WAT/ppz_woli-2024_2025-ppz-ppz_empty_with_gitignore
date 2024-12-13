@@ -54,7 +54,6 @@ import {
     @UseGuards(LocalAuthGuard)
     @Post('/login')
     login(@Request() req): any {
-      console.log('User after login:', req.user); // Debugging
       return {User: req.user,
               msg: 'User logged in'};
     }

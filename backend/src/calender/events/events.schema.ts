@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
-import { Recurring , RecurringSchema } from '../recurring.schema';
+import { Recurring , RecurringSchema } from '../recurring/recurring.schema';
 
 
 @Schema()

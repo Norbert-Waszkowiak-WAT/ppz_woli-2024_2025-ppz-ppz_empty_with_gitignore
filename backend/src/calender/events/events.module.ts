@@ -3,7 +3,7 @@ import { MongooseModule } from "@nestjs/mongoose"
 import { userModel } from 'src/users/users.schema';
 import { EventSchema } from "./events.schema";
 import { EventsService } from "./events.service"
-import { Recurring , RecurringSchema } from '../recurring.schema';
+import { Recurring , RecurringSchema } from '../recurring/recurring.schema';
 
 @Module({
   imports: [MongooseModule.forFeature([{ name: "user", schema: userModel }]),
