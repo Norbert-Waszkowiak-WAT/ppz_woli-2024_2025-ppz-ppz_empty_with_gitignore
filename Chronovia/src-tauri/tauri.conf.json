@@ -1,6 +1,6 @@
 {
-  "$schema": "https://schema.tauri.app/config/2.0.0",
-  "productName": "Chronovia",
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "chronovia",
   "version": "0.1.0",
   "identifier": "com.chronovia.app",
   "build": {
@@ -13,14 +13,14 @@
     "windows": [
       {
         "title": "Chronovia",
-        "width": 800,
-        "height": 600
-        
+        "width": 1280,
+        "height": 720,
+        "center": true
       }
     ],
     "security": {
       "csp": null
-    }
+    } 
   },
   "bundle": {
     "active": true,

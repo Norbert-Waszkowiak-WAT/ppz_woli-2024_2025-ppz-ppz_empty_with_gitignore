@@ -30,12 +30,15 @@ import {
       @Body('username') userName: string,
       @Body('email') userEmail: string
     ) {
-      if(await this.usersService.checkUniqueness(userEmail)){
-        throw new UnauthorizedException('Email already used');
+      if(await this.usersService.checkUniqueness('email', userEmail)){
+        throw new NotAcceptableException('Email already used');
       }
-      if(await this.usersService.checkUniqueness(userName)){
-        throw new UnauthorizedException('Username already used');
+      if(await this.usersService.checkUniqueness('username', userName)){
+        throw new NotAcceptableException('Username already used');
       }
+      console.log(userEmail);
+      console.log(await this.usersService.checkUniqueness('username', userName));
+      console.log(await this.usersService.checkUniqueness('email', userEmail));
       const saltOrRounds = 10;
       const hashedPassword = await bcrypt.hash(userPassword, saltOrRounds);
       const result = await this.usersService.insertUser(
@@ -44,7 +47,7 @@ import {
         userEmail
       );
       return {
-        msg: 'Now please verify your email',
+        message: 'Now please verify your email',
         userId: result.id,
         userName: result.username,
         userEmail: result.email
@@ -55,7 +58,7 @@ import {
     @Post('/login')
     login(@Request() req): any {
       return {User: req.user,
-              msg: 'User logged in'};
+        message: 'User logged in'};
     }
      //Get / protected
     @UseGuards(AuthenticatedGuard)
@@ -72,7 +75,7 @@ sessionInfo(@Request() req): any {
     @Get('/logout')
       logout(@Request() req): any {
         req.session.destroy();
-        return { msg: 'The user session has ended' }
+        return { message: 'The user session has ended' }
       }
       @Post('verify-sentcode')
       async verifycodesent(@Body('email') email: string, @Body('code') code: string,@Body('password') password: string) {

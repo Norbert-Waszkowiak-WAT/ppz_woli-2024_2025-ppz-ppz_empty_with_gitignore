@@ -2,9 +2,9 @@ cargo-features = ["profile-rustflags"]
 
 [package]
 name = "chronovia"
-version = "0.1.0"
+version = "0.1.9"
 description = "A Tauri App"
-authors = ["you"]
+authors = ["Dragurashiphylax"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -17,18 +17,19 @@ name = "chronovia_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]
-tauri-build = { version = "2.0.0", features = [] }
+tauri-build = { version = "2", features = [] }
 
 [dependencies]
-tauri = { version = "2.0.0", features = [] }
-tauri-plugin-shell = "2.0.0"
+tauri = { version = "2", features = [] }
+tauri-plugin-shell = "2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+tauri-plugin-stronghold = "2"
+tauri-plugin-store = "2"
+tauri-plugin-http = "2"
 
-# Adding support for profiles
 [unstable]
 profile-rustflags = true
-
 
 [profile.dev]
 lto = false
