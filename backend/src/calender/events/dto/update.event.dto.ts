@@ -1,7 +1,5 @@
 import { Type } from "class-transformer";
 import { IsOptional, IsString, ValidateNested } from "class-validator";
-import { RecurringDto } from "src/calender/recurring/recurring.dto";
-
 export class UpdateEventDto {
     @IsOptional()
     @IsString()
@@ -24,7 +22,6 @@ export class UpdateEventDto {
     endDate?: Date;
   
     @IsOptional()
-    @ValidateNested()
-    @Type(() => RecurringDto)
-    recurring?: RecurringDto;
+    @IsString() // Validate as a string (RRule format)
+    recurring?: string;
   }

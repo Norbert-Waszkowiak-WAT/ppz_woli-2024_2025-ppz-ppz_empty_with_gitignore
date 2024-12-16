@@ -1,8 +1,5 @@
-import { IsNotEmpty, IsOptional, IsDate, IsString, ValidateNested, IsIn, IsArray } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsDate, IsString } from 'class-validator';
 import { Type } from 'class-transformer';
-import { RecurringDto } from '../../recurring/recurring.dto';
-
-
 
 export class CreateEventDto {
   @IsNotEmpty()
@@ -25,8 +22,8 @@ export class CreateEventDto {
   @Type(() => Date)
   endDate: Date;
 
+  // Replace recurring with rrule
   @IsOptional()
-  @ValidateNested()
-  @Type(() => RecurringDto)
-  recurring?: RecurringDto;
+  @IsString() // Validate as a string (RRule format)
+  recurring?: string;
 }

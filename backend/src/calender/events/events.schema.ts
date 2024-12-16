@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
-import { Recurring , RecurringSchema } from '../recurring/recurring.schema';
 
 
 @Schema()
@@ -15,14 +14,15 @@ export class Event {
   @Prop({ required: true })
   startDate: Date;
 
-  @Prop({ required: true })
+  @Prop({ required: false })
   endDate: Date;
 
   @Prop({ required: true })
   userId: string; // Reference to the user
-
-  @Prop({ type: RecurringSchema })
-recurring?: Recurring;
+  @Prop()
+  recurring?: string; // Store RRule as a string
+  @Prop ({required: false})
+  occurrenceDate:string;
 }
 
 export const EventSchema = SchemaFactory.createForClass(Event);
