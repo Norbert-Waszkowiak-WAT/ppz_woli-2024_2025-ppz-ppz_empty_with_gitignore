@@ -15,7 +15,6 @@ import { Injectable, NotAcceptableException } from '@nestjs/common';
         if (user && passwordValid) {
           return {
             userId: user.id,
-            userName: user.username
           };
         }
         return null;
