@@ -20,8 +20,6 @@ import { rrulestr } from 'rrule';
       return this.EventService.createEvent(addEventDto, userId);
     }
 
-
-
     @Patch('/update/:eventId')
 @UseGuards(AuthenticatedGuard) // Ensure the user is authenticated
 async editEvent(
@@ -57,9 +55,9 @@ async getAllOccurrences(
     new Date(endDate),
     userId
   );
-
   return occurrences;
 }
+
 @Get('/delete/:eventId')
 @UseGuards(AuthenticatedGuard)
 async deleteEvent(@Param('eventId') eventId: string) {
