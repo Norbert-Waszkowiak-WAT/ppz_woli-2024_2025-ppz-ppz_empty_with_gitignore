@@ -41,22 +41,21 @@ async editEvent(
     throw error;
   }
 }
-@Get('/occurrences/:eventId')
-@UseGuards(AuthenticatedGuard) // Ensure the user is authenticated
-
 @Get('/getEvents')
 @UseGuards(AuthenticatedGuard)
 async getAllOccurrences(
   @Body('startDate') startDate: string,
+  @Req() req: any,
   @Body('endDate') endDate: string
 ) {
   if (!startDate || !endDate) {
     throw new BadRequestException('Start date and end date are required');
   }
-
+  const userId = req.session.passport.user; 
   const occurrences = await this.EventService.getAllEventOccurrences(
     new Date(startDate),
-    new Date(endDate)
+    new Date(endDate),
+    userId
   );
 
   return occurrences;

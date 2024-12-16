@@ -34,8 +34,8 @@ export class EventsService {
     return result;
   }
 
-async getAllEventOccurrences(startDate: Date, endDate: Date) {
-  const events = await this.eventModel.find(); // Retrieve all events
+async getAllEventOccurrences(startDate: Date, endDate: Date, userId: any) {
+  const events = await this.eventModel.find( { userId }); // Retrieve all events
 
   const allOccurrences = [];
 
