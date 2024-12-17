@@ -16,6 +16,8 @@ import {
   import { LocalAuthGuard } from 'src/auth/local.auth.guard';
   import { UsersService } from './users.service';
   import { EmailService } from 'src/email/email.service';
+import { throwException } from 'src/responseStatus/auth.response';
+import { session } from 'passport';
   @Controller('users')
   export class UsersController {
     
@@ -36,9 +38,6 @@ import {
       if(await this.usersService.checkUniqueness('username', userName)){
         throw new NotAcceptableException('Username already used');
       }
-      console.log(userEmail);
-      console.log(await this.usersService.checkUniqueness('username', userName));
-      console.log(await this.usersService.checkUniqueness('email', userEmail));
       const saltOrRounds = 10;
       const hashedPassword = await bcrypt.hash(userPassword, saltOrRounds);
       const result = await this.usersService.insertUser(
@@ -57,20 +56,14 @@ import {
     @UseGuards(LocalAuthGuard)
     @Post('/login')
     login(@Request() req): any {
-      return {User: req.user,
-        message: 'User logged in'};
+      return {
+        message: 'User logged in',
+        userName: req.user.username,
+        userEmail: req.user.email,
+        sessionId: req.session.id
+      };
     }
-     //Get / protected
-    @UseGuards(AuthenticatedGuard)
-    @Get('/protected')
-    getHello(@Request() req): string {
-      return req.user;
-    }
-     //Get / logout
-     @Get('/session-info')
-sessionInfo(@Request() req): any {
-  return req.session;
-}
+
 
     @Get('/logout')
       logout(@Request() req): any {

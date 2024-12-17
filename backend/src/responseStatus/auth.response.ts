@@ -1,58 +1,27 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 
-
-const messages = [
-    {
-        "Unauthorized": { responseCode: 600, message: 'Unauthorized' },
-        "Email needs verification": { responseCode: 601, message: 'Email needs verification' },
-        "Email is incorrect": { responseCode: 602, message: 'Email is incorrect' },
-        "Password is incorrect": { responseCode: 603, message: 'Password is incorrect' }
-    }
-] 
-
-throwEmailNeedVerification();
-throwException("Email needs verification");
-
-export function throwException(whichOne: string): never {
+class ThrowExceptionClass {
+  public createCustomException(responseCode: number,  statusCode: number): never {
     throw new HttpException(
-        {
-            statusCode: HttpStatus.UNAUTHORIZED,
-            responseCode: messages[whichOne].responseCode,
-            message: messages[whichOne].message,
-        },
-        HttpStatus.UNAUTHORIZED,
-    );  
+      {
+        statusCode,
+        responseCode,
+      },
+      statusCode,
+    );
+  }
+
+  EmailNeedVerification(): never {
+    this.createCustomException(601 /*Custom response code*/,401 /*Status Code */);
+  }
+
+  IncorrectEmail(): never {
+    this.createCustomException(602,401);
+  }
+
+  IncorrectPassword(): never {
+    this.createCustomException(603, 401);
+  }
 }
 
-export function throwEmailNeedVerification(): never {
-  throw new HttpException(
-    {
-      statusCode: HttpStatus.UNAUTHORIZED,
-      responseCode: 601,
-      message: 'Email needs verification',
-    },
-    HttpStatus.UNAUTHORIZED,
-  );
-}
-
-export function throwIncorrectEmail(): never {
-  throw new HttpException(
-    {
-      statusCode: HttpStatus.UNAUTHORIZED,
-      responseCode: 602,
-      message: 'Email is incorrect',
-    },
-    HttpStatus.UNAUTHORIZED,
-  );
-}
-
-export function throwIncorrectPassword(): never {
-  throw new HttpException(
-    {
-      statusCode: HttpStatus.UNAUTHORIZED,
-      responseCode: 603,
-      message: 'Password is incorrect',
-    },
-    HttpStatus.UNAUTHORIZED,
-  );
-}
+export const throwException = new ThrowExceptionClass();
