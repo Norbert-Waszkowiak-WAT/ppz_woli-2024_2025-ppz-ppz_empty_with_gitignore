@@ -1,26 +1,19 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { createCustomException } from './response.utils';
 
 class ThrowExceptionClass {
-  public createCustomException(responseCode: number,  statusCode: number): never {
-    throw new HttpException(
-      {
-        statusCode,
-        responseCode,
-      },
-      statusCode,
+  EmailNeedVerification(): never {
+    throw createCustomException(
+      601 /*Custom response code*/,
+      401 /*Status Code */,
     );
   }
 
-  EmailNeedVerification(): never {
-    this.createCustomException(601 /*Custom response code*/,401 /*Status Code */);
-  }
-
   IncorrectEmail(): never {
-    this.createCustomException(602,401);
+    throw createCustomException(602, 401);
   }
 
   IncorrectPassword(): never {
-    this.createCustomException(603, 401);
+    throw createCustomException(603, 401);
   }
 }
 
