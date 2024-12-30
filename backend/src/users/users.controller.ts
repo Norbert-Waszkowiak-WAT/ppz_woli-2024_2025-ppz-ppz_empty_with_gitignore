@@ -56,8 +56,9 @@ import {
     }
     @UseGuards(LocalAuthGuard)
     @Post('/login')
-    login(@Request() req): any {
-      return {User: req.user,
+    async login(@Request() req,@Body('email') email: string): Promise<any> {
+      const user = await this.usersService.getUser(email);
+      return {User: user.username,
         message: 'User logged in'};
     }
      //Get / protected
