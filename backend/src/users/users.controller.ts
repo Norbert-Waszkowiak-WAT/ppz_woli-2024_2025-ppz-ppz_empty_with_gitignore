@@ -29,10 +29,10 @@ export class UsersController {
     @Body('email') userEmail: string,
   ) {
     if (await this.usersService.checkUniqueness('email', userEmail)) {
-      throw new NotAcceptableException('Email already used');
+      throwException.EmailAlreadyUsed();
     }
     if (await this.usersService.checkUniqueness('username', userName)) {
-      throw new NotAcceptableException('Username already used');
+      throwException.UsernameAlreadyUsed();
     }
     const saltOrRounds = 10;
     const hashedPassword = await bcrypt.hash(userPassword, saltOrRounds);
@@ -41,12 +41,11 @@ export class UsersController {
       hashedPassword,
       userEmail,
     );
-    return {
-      message: 'Now please verify your email',
-      userId: result.id,
+    const user = {
       userName: result.username,
       userEmail: result.email,
     };
+    throwException.PleaseVerifyYourEmail(user);
   }
   @UseGuards(LocalAuthGuard)
   @Post('/login')
@@ -62,7 +61,7 @@ export class UsersController {
   @Get('/logout')
   logout(@Request() req): any {
     req.session.destroy();
-    return { message: 'The user session has ended' };
+    throwException.UserLoggedOutSuccessfully();
   }
   @Post('verify-sentcode')
   async verifycodesent(
@@ -76,15 +75,15 @@ export class UsersController {
       password,
     );
     if (isVerified) {
-      return { message: 'Email verified successfully' };
+      throwException.EmailVerifiedSuccessfully();
     } else {
-      return { message: 'Invalid verification code' };
+      throwException.InvalidVerificationCode();
     }
   }
   @Post('resend-verification-code')
   async resendVerificationCode(@Body('email') email: string) {
     await this.EmailService.sendVerificationCode(email);
-    return { message: 'Verification code sent successfully' };
+    throwException.VerificationCodeSentSuccessfully();
   }
   @Post('reset-password')
   async Passwordreset(@Body('email') email: string) {
@@ -96,7 +95,7 @@ export class UsersController {
     // Send the email with the reset link here
     await this.EmailService.sendPasswordResetEmail(email, user.username, token);
 
-    return { message: 'Password reset email sent' };
+    throwException.PasswordResetEmailSentSuccessfully();
   }
 
   @Post('delete-user')
@@ -113,7 +112,7 @@ export class UsersController {
       throwException.IncorrectPassword();
     }
     await this.usersService.deleteUser(user);
-    return { message: 'User deleted successfully' };
+    throwException.UserDeletedSuccessfully();
   }
 
   @Post('reset-password/:token')
@@ -123,12 +122,9 @@ export class UsersController {
   ) {
     const isReset = await this.usersService.resetPassword(token, newPassword);
     if (!isReset) {
-      throw new HttpException(
-        'Invalid or expired token',
-        HttpStatus.BAD_REQUEST,
-      );
+      throwException.InvalidOrExpiredToken();
     }
 
-    return { message: 'Password reset successfully' };
+    throwException.PasswordResetSuccessfully();
   }
 }

@@ -1,10 +1,10 @@
 import { createCustomException } from './response.utils';
 
-class ThrowExceptionClass {
-  EmailNeedVerification(): never {
+class ThrowAuthExceptionClass {
+  EmailNeedsVerification(): never {
     throw createCustomException(
       601 /*Custom response code*/,
-      401 /*Status Code */,
+      422 /*Status Code  403*/,
     );
   }
 
@@ -15,6 +15,48 @@ class ThrowExceptionClass {
   IncorrectPassword(): never {
     throw createCustomException(603, 401);
   }
+  InvalidVerificationCode(): never {
+    throw createCustomException(604, 401);
+  }
+  EmailVerifiedSuccessfully(): never {
+    throw createCustomException(605, 200);
+  }
+  VerificationCodeSent(): never {
+    throw createCustomException(606, 200);
+  }
+  UsernameAlreadyUsed(): never {
+    throw createCustomException(607, 409);
+  }
+  EmailAlreadyUsed(): never {
+    throw createCustomException(608, 409);
+  }
+  UserloggedIn(): never {
+    throw createCustomException(609, 200);
+  }
+  Usernotfound(): never {
+    throw createCustomException(610, 404);
+  }
+  UserLoggedOutSuccessfully(): never {
+    throw createCustomException(611, 200);
+  }
+  PasswordResetEmailSentSuccessfully(): never {
+    throw createCustomException(612, 200);
+  }
+  InvalidOrExpiredToken(): never {
+    throw createCustomException(613, 401);
+  }
+  PasswordResetSuccessfully(): never {
+    throw createCustomException(614, 200);
+  }
+  PleaseVerifyYourEmail(data?: any): never {
+    throw createCustomException(615, 202, data);
+  }
+  VerificationCodeSentSuccessfully() {
+    throw createCustomException(616, 200);
+  }
+  UserDeletedSuccessfully() {
+    throw createCustomException(617, 200);
+  }
 }
 
-export const throwException = new ThrowExceptionClass();
+export const throwException = new ThrowAuthExceptionClass();
