@@ -1,10 +1,11 @@
-import { Injectable, NotAcceptableException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { userSchema } from './users.schema';
 import { EmailService } from 'src/email/email.service';
 import * as bcrypt from 'bcrypt';
 import * as crypto from 'crypto';
+import { throwException } from 'src/responseStatus/auth.response';
 @Injectable()
 export class UsersService {
   constructor(
@@ -43,7 +44,7 @@ export class UsersService {
     const passwordValid = await bcrypt.compare(password, user.password);
     const isCodeValid = await this.EmailService.verifyCode(email, code);
     if (!user) {
-      throw new NotAcceptableException('could not find the user');
+      throwException.Usernotfound();
     }
     if (user && passwordValid && isCodeValid) {
       return true;

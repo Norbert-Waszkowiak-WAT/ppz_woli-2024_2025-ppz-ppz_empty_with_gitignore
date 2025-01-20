@@ -5,9 +5,6 @@ import {
   Post,
   UseGuards,
   Request,
-  NotAcceptableException,
-  HttpException,
-  HttpStatus,
   Param,
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
@@ -89,7 +86,7 @@ export class UsersController {
   async Passwordreset(@Body('email') email: string) {
     const token = await this.usersService.generatePasswordResetToken(email);
     if (!token) {
-      throw new HttpException('Email not found', HttpStatus.NOT_FOUND);
+      throwException.IncorrectEmail();
     }
     const user = await this.usersService.getUser(email);
     // Send the email with the reset link here
@@ -105,7 +102,7 @@ export class UsersController {
   ) {
     const user = await this.usersService.getUser(email);
     if (!user) {
-      throw new NotAcceptableException('could not find the user');
+      throwException.Usernotfound();
     }
     const passwordValid = await bcrypt.compare(password, user.password);
     if (!passwordValid) {
