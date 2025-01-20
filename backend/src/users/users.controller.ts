@@ -44,13 +44,15 @@ export class UsersController {
     };
     throwException.PleaseVerifyYourEmail(user);
   }
+  
   @UseGuards(LocalAuthGuard)
   @Post('/login')
   login(@Request() req): any {
+    const user = await this.usersService.getUser(email);
     return {
       message: 'User logged in',
-      userName: req.user.username,
-      userEmail: req.user.email,
+      userName: user.username,
+      userEmail: user.email,
       sessionId: req.session.id,
     };
   }
@@ -76,6 +78,7 @@ export class UsersController {
     } else {
       throwException.InvalidVerificationCode();
     }
+
   }
   @Post('resend-verification-code')
   async resendVerificationCode(@Body('email') email: string) {
@@ -87,7 +90,7 @@ export class UsersController {
     const token = await this.usersService.generatePasswordResetToken(email);
     if (!token) {
       throwException.IncorrectEmail();
-    }
+
     const user = await this.usersService.getUser(email);
     // Send the email with the reset link here
     await this.EmailService.sendPasswordResetEmail(email, user.username, token);
