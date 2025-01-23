@@ -12,11 +12,13 @@ import { LocalAuthGuard } from 'src/auth/local.auth.guard';
 import { UsersService } from './users.service';
 import { EmailService } from 'src/email/email.service';
 import { throwException } from 'src/responseStatus/auth.response';
+import { SessionsService } from 'src/sessions/sessions.service';
 @Controller('users')
 export class UsersController {
   constructor(
     private readonly usersService: UsersService,
     private readonly EmailService: EmailService,
+    private readonly sessionService: SessionsService,
   ) {}
   //signup
   @Post('/register')
@@ -48,10 +50,17 @@ export class UsersController {
   @Post('/login')
   async login(@Request() req, @Body('email') email: string): Promise<any> {
     const user = await this.usersService.getUser(email);
+    const userId = req.session.passport.user; // Passport sets this after login
+    const sessionId = req.session.id; // Get the session ID from Express session
+
+    if (userId && sessionId) {
+      await this.sessionService.saveSession(userId, sessionId); // Save session to Redis
+    }
     return {
       User: user.username,
       message: 'User logged in',
       email: user.email,
+      sessionId: sessionId,
     };
   }
   @Get('/logout')
