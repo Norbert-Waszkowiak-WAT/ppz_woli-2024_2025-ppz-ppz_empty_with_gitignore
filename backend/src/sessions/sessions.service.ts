@@ -15,7 +15,8 @@ export class SessionsService {
     ttl?: number,
   ): Promise<void> {
     const key = `user:${userId}`;
-    await this.redis.sadd(key, sessionId); // Add session ID to the set
+    const timestamp = Date.now();
+    await this.redis.sadd(key, sessionId, timestamp);
     if (ttl) {
       await this.redis.expire(key, ttl);
     }
@@ -40,5 +41,18 @@ export class SessionsService {
     if (exists) {
       await this.redis.expire(key, ttl); // Renew TTL for the user's session set
     }
+  }
+
+  async checkIfSessionIsValid(
+    sessionId: string,
+    userId: string,
+  ): Promise<boolean> {
+    const key = `user:${userId}`;
+    const sessionExists = await this.redis.sismember(key, sessionId);
+    return sessionExists === 1;
+  }
+  async deleteAllSessions(userId: string): Promise<void> {
+    const key = `user:${userId}`;
+    await this.redis.del(key); // Delete the user's session set
   }
 }

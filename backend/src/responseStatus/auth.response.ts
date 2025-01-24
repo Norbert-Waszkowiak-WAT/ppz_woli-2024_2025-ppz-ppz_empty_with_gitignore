@@ -30,8 +30,9 @@ class ThrowAuthExceptionClass {
   EmailAlreadyUsed(): never {
     throw createCustomException(608, 409);
   }
-  UserloggedIn(): never {
-    throw createCustomException(609, 200);
+  UserloggedIn(data?: any): never {
+    console.log('data:', data);
+    throw createCustomException(609, 200, data);
   }
   Usernotfound(): never {
     throw createCustomException(610, 404);

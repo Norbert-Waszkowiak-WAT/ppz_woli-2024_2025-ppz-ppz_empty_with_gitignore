@@ -8,7 +8,6 @@ export class SessionMiddleware implements NestMiddleware {
   async use(req: any, res: any, next: () => void) {
     const userId = req.session?.passport?.user; // Assuming `req.user` contains the user object
     const sessionId = req.session?.id; // Assuming the session ID is in the request
-    //console.log(req.session?.id);
     if (userId && sessionId) {
       // Renew the session TTL
       await this.sessionsService.renewSessionTTL(userId, sessionId, 2592000); // 30 days TTL

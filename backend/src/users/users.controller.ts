@@ -6,13 +6,16 @@ import {
   UseGuards,
   Request,
   Param,
+  Delete,
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { LocalAuthGuard } from 'src/auth/local.auth.guard';
 import { UsersService } from './users.service';
 import { EmailService } from 'src/email/email.service';
 import { throwException } from 'src/responseStatus/auth.response';
+import { throwSessionException } from 'src/responseStatus/sessions.response';
 import { SessionsService } from 'src/sessions/sessions.service';
+import { AuthenticatedGuard } from 'src/auth/authenticated.guard';
 @Controller('users')
 export class UsersController {
   constructor(
@@ -131,5 +134,19 @@ export class UsersController {
     }
 
     throwException.PasswordResetSuccessfully();
+  }
+  @UseGuards(AuthenticatedGuard)
+  @Delete('destroyallsessions')
+  async destroyAllSessions(@Request() req) {
+    await this.sessionService.deleteAllSessions(req.session.passport.user);
+    throwSessionException.AllSessionsDestroyedSuccessfully();
+  }
+  @UseGuards(AuthenticatedGuard)
+  @Get('getallsessions')
+  async getAllSessions(@Request() req) {
+    const sessions = await this.sessionService.getSessions(
+      req.session.passport.user,
+    );
+    throwSessionException.AllSessionsFetchedSuccessfully(sessions);
   }
 }

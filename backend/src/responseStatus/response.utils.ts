@@ -5,6 +5,7 @@ export function createCustomException(
   statusCode: number,
   additionalData?: any,
 ): never {
+  console.log('additionalData:', additionalData);
   throw new HttpException(
     {
       statusCode,
