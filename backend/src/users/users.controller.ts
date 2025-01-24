@@ -59,12 +59,13 @@ export class UsersController {
     if (userId && sessionId) {
       await this.sessionService.saveSession(userId, sessionId); // Save session to Redis
     }
-    return {
+
+    const data = {
       User: user.username,
-      message: 'User logged in',
       email: user.email,
       sessionId: sessionId,
     };
+    throwException.UserloggedIn(data);
   }
   @Get('/logout')
   logout(@Request() req): any {
